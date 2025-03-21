@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  volumes:
+  - name: my-storage
+    persistentVolumeClaim:
+      claimName: my-pvc
+  containers:
+  - name: nginx
+    image: nginx
+    command: ["/bin/sh", "-c", "echo 'Rafli Alfian' > /data/index.html && exec nginx -g 'daemon off;'"]
+    volumeMounts:
+    - mountPath: "/data"
+      name: my-storage
